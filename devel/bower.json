@@ -1,0 +1,29 @@
+{
+  "name": "portfolio",
+  "authors": [
+    ""
+  ],
+  "description": "",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.3.5",
+    "bootstrap": "~3.3.5",
+    "js-polyfills": "~0.1.12",
+    "d3": "~3.5.14",
+    "sweetalert": "~1.1.3"
+  },
+  "keywords": [
+    ""
+  ]
+}

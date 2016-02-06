@@ -1,0 +1,35 @@
+{
+  "name": "MechWarriorStats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/izy-izzy/MechWarriorStats.git"
+  },
+  "author": "Lukas Kalcok",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/izy-izzy/MechWarriorStats/issues"
+  },
+  "homepage": "https://github.com/izy-izzy/MechWarriorStats",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.2.0",
+    "bower": "^1.6.5",
+    "fs": "0.0.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-concat-css": "^2.2.0",
+    "gulp-cssimport": "^2.1.1-b",
+    "gulp-cssshrink": "^0.1.5",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.2",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5"
+  }
+}

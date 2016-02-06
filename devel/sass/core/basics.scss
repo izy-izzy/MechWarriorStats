@@ -1,0 +1,17 @@
+body{
+	font-family: 'Titillium Web', sans-serif;
+	background-color: #111111;
+	background-image: url('./../images/background.jpg');
+	background-repeat: repeat-x repeat-y;
+	background-position: top left;
+
+	.mechs{
+		max-height: 600px;
+		height: 600px;
+		width:100%;
+		.mech{
+			//fill: white;
+		}
+	}
+
+}
