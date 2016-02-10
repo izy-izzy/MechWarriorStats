@@ -1,11 +1,12 @@
 body{
 	font-family: 'Titillium Web', sans-serif;
 	background-color: #111111;
-	background-image: url('./../images/background.jpg');
+	background-image: url('./../images/body_background.png');
 	background-repeat: repeat-x repeat-y;
 	background-position: top left;
 
 	.mechs{
+		background-repeat: no-repeat;
 		max-height: 600px;
 		height: 600px;
 		width:100%;

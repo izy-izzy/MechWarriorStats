@@ -7,8 +7,17 @@ var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var concatCss = require('gulp-concat-css');
 var minifyCss = require('gulp-minify-css');
+var browsersync = require('browser-sync').create();
 
-gulp.task('default', ['sass', 'css', 'scripts','watch']);
+gulp.task('default', ['browsersync','sass', 'css', 'scripts','watch']);
+
+gulp.task('browsersync', function(){
+	browsersync.init({
+		server: {
+			baseDir: 'public'
+		},
+	});
+});
 
 gulp.task('watch', function(){
 	gulp.watch([
@@ -22,6 +31,9 @@ gulp.task('watch', function(){
 		'./devel/scripts/*/*.js',
 		], ['scripts']);
 	});
+ 	gulp.watch([
+ 		'./public/*.html'
+ 	], browsersync.reload);
 
 gulp.task('css' , function() {
 	return gulp.src([
@@ -29,7 +41,10 @@ gulp.task('css' , function() {
 		])
 	.pipe(concatCss("./public/css/plugins.css"))
 	.pipe(minifyCss({compatibility: 'ie8'}))
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./'))
+    .pipe(browsersync.reload({
+    	stream: true
+    }));
 });
 
 gulp.task('sass', function () {
@@ -43,7 +58,10 @@ gulp.task('sass', function () {
     )
     //.pipe(minifyCss({compatibility: 'ie8'}))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./public/css/'));
+    .pipe(gulp.dest('./public/css/'))
+    .pipe(browsersync.reload({
+    	stream: true
+    }));
 });
 
 gulp.task('scripts', function() {
@@ -53,7 +71,7 @@ gulp.task('scripts', function() {
 		'./devel/bower_components/bootstrap/dist/js/bootstrap.min.js',
         './devel/bower_components/sweetalert/dist/sweetalert.min.js',
         './devel/bower_components/d3/d3.min.js',
-        './devel/scripts/app.js'
+        './devel/scripts/*.js'
 		])
 	.pipe(concat('app.min.js'))
 	//disable for devel 
@@ -66,4 +84,7 @@ gulp.task('scripts', function() {
     	}))*/
 	.pipe(sourcemaps.write('./'))
 	.pipe(gulp.dest('./public/js/'))
+	.pipe(browsersync.reload({
+    	stream: true
+    }));
 });

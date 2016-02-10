@@ -1,0 +1,41 @@
+.font{
+	&-large{
+		font-size: 22px;
+	}
+	&-small{
+		font-size: 10px;
+	}
+	&-regular{
+		font-size: 16px;
+	}
+}
+
+.text{
+	&-underline{
+		text-decoration: underline;
+	}
+	&-uppercase{
+		text-transform: uppercase;
+	}
+}
+
+h1{
+	@extend .font-small;
+	@extend .text-uppercase;
+	font-size: 28px;
+}
+h2{
+	@extend .font-small;
+	@extend .text-uppercase;
+	font-size: 22px;
+}
+h3{
+	@extend .font-small;
+	@extend .text-uppercase;
+	font-size: 18px;
+}
+h4{
+	@extend .font-small;
+	@extend .text-uppercase;
+	font-size: 14px;	
+}

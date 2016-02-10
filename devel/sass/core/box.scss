@@ -1,0 +1,133 @@
+.box{
+	margin: 50px;
+	background-repeat: no-repeat;
+	min-height: 100px;
+	min-width: 100px;
+	position: relative;
+	color: white;
+	.header{
+		position: absolute;
+		padding-left: 80px;
+		top: 0;
+		left: 0;
+		padding : 0px 60px 0px 60px; 
+		height: 52px;
+		h2{
+			font-size: 25px;
+			text-transform: uppercase;
+			line-height: 52px;
+			margin: 0px;
+			padding: 0px;
+		}
+	}
+	background: url('/images/box/box_head_top.png') right top repeat-x;
+	box-shadow: inset 0px 0px 1px 1px #949494;
+	.content{
+		width: 100%;
+		height: 100%;
+		min-height: 100px;
+		min-width: 100px;
+		padding: 52px 0px;
+		background: url('/images/box/box_corner_right_bottom.png') right bottom no-repeat,
+					url('/images/box/box_corner_left_bottom.png') left bottom no-repeat,
+					url('/images/box/box_corner_left_top.png') left top no-repeat;
+		.line{
+			&.beam{
+				color:$weapon-color-beam;
+				.range{
+					&-min{ color: $weapon-color-beam; }
+					&-long{ background : $weapon-color-beam;}
+					&-max{ 
+						@include gradient-horizontal($weapon-color-beam, transparent, 0%, 100%);
+						color: $weapon-color-beam;
+					}
+				}
+			}
+			&.missile{
+				color: $weapon-color-missile;
+				.range{
+					&-min{ color: $weapon-color-missile; }
+					&-long{ background : $weapon-color-missile;}
+					&-max{ 
+						@include gradient-horizontal($weapon-color-missile, transparent, 0%, 100%);
+						color: $weapon-color-missile;
+					}
+				}
+			}
+			&.ams{
+				color:$weapon-color-ams;
+				.range{
+					&-min{ color: $weapon-color-ams; }
+					&-long{ background : $weapon-color-ams;}
+					&-max{ 
+						@include gradient-horizontal($weapon-color-ams, transparent, 0%, 100%);
+						color: $weapon-color-ams;
+					}
+				}
+			}
+			&.ballistic{
+				color:$weapon-color-ballistic;
+				.range{
+					&-min{ color: $weapon-color-ballistic; }
+					&-long{ background : $weapon-color-ballistic;}
+					&-max{ 
+						@include gradient-horizontal($weapon-color-ballistic, transparent, 0%, 100%);
+						color: $weapon-color-ballistic;
+					}
+				}
+			}
+			@extend .clearfix;
+			padding: 10px 60px; 
+			background: transparent;
+			h3{
+				margin: 0px;
+			}
+			&:nth-child(2n){
+				background : rgba(255,255,255,0.1);
+			}
+			.head{
+				float:left;
+				width: 25%;
+			}
+			.range{
+				width: 75%;
+				float :left;
+				&-min{
+					background: black;
+					float :left;
+					overflow: hidden;
+					text-align:right;
+					padding-right: 5px;
+					color: $box-green;
+				}
+				&-long{
+					background: $box-green;
+					float :left;
+					overflow: hidden;
+					text-align:right;
+					padding-right: 5px;
+					color: black;
+				}
+				&-max{
+					border-left: 1px solid black;
+					float :left;
+					overflow: hidden;
+					text-align:right;
+					padding-right: 5px;
+					color: $box-green;
+					@include gradient-horizontal($box-green, transparent, 0%, 100%)
+				}
+			}
+		}
+	}
+	&-green{
+		box-shadow: inset 0px 0px 1px 1px $box-green;
+		background: url('/images/box/box_head_top.png') right top repeat-x;
+		color: $box-green;
+		.content{
+			background: url('/images/box/box_green_corner_right_bottom.png') right bottom no-repeat,
+						url('/images/box/box_green_corner_left_bottom.png') left bottom no-repeat,
+						url('/images/box/box_green_corner_left_top.png') left top no-repeat;
+		}
+	}
+}

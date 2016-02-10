@@ -1,7 +1,7 @@
 $(document).on('ready',function(){
   	console.log('Project Loaded');
 
-	function getInt(object){
+	/*function getInt(object){
 		if (typeof object === 'string'){
 			return parseInt(object);
 		} else if (typeof object == "int"){
@@ -67,9 +67,9 @@ $(document).on('ready',function(){
 				.attr("data-tonnage", function(d){
 					return getInt(d.details.tons);
 				});
-	}
+	}*/
 
-	function jsonToArray(data){
+	/*function jsonToArray(data){
 		var outArray = [];
 		for (key in data){
 			var entry = data[key]; 
@@ -90,7 +90,7 @@ $(document).on('ready',function(){
 			data[a].details.tons = getInt(data[a].details.tons);
 		}
 		console.log(data);
-	}
+	}*/
 
 
 	$(window).on('resize',function(){
