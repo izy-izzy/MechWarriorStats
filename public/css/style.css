@@ -5901,19 +5901,23 @@ h4 {
           background-repeat: repeat-x;
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF28BBFF', endColorstr='#00000000', GradientType=1);
           color: #28bbff; }
-      .box .content .line.missile {
+        .box .content .line.beam .tonnage {
+          background: #28bbff; }
+      .box .content .line.missle {
         color: #60ef00; }
-        .box .content .line.missile .range-min {
+        .box .content .line.missle .range-min {
           color: #60ef00; }
-        .box .content .line.missile .range-long {
+        .box .content .line.missle .range-long {
           background: #60ef00; }
-        .box .content .line.missile .range-max {
+        .box .content .line.missle .range-max {
           background-image: -webkit-linear-gradient(left, #60ef00 0%, transparent 100%);
           background-image: -o-linear-gradient(left, #60ef00 0%, transparent 100%);
           background-image: linear-gradient(to right, #60ef00 0%, transparent 100%);
           background-repeat: repeat-x;
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF60EF00', endColorstr='#00000000', GradientType=1);
           color: #60ef00; }
+        .box .content .line.missle .tonnage {
+          background: #60ef00; }
       .box .content .line.ams {
         color: #EEEEEE; }
         .box .content .line.ams .range-min {
@@ -5927,6 +5931,8 @@ h4 {
           background-repeat: repeat-x;
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEEEEEE', endColorstr='#00000000', GradientType=1);
           color: #EEEEEE; }
+        .box .content .line.ams .tonnage {
+          background: #EEEEEE; }
       .box .content .line.ballistic {
         color: #d600d9; }
         .box .content .line.ballistic .range-min {
@@ -5940,6 +5946,8 @@ h4 {
           background-repeat: repeat-x;
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFD600D9', endColorstr='#00000000', GradientType=1);
           color: #d600d9; }
+        .box .content .line.ballistic .tonnage {
+          background: #d600d9; }
       .box .content .line h3 {
         margin: 0px; }
       .box .content .line:nth-child(2n) {
@@ -5947,35 +5955,39 @@ h4 {
       .box .content .line .head {
         float: left;
         width: 25%; }
-      .box .content .line .range {
+      .box .content .line .data {
         width: 75%;
         float: left; }
-        .box .content .line .range-min {
-          background: black;
-          float: left;
-          overflow: hidden;
-          text-align: right;
-          padding-right: 5px;
-          color: #deff00; }
-        .box .content .line .range-long {
-          background: #deff00;
-          float: left;
-          overflow: hidden;
-          text-align: right;
-          padding-right: 5px;
-          color: black; }
-        .box .content .line .range-max {
-          border-left: 1px solid black;
-          float: left;
-          overflow: hidden;
-          text-align: right;
-          padding-right: 5px;
-          color: #deff00;
-          background-image: -webkit-linear-gradient(left, #deff00 0%, transparent 100%);
-          background-image: -o-linear-gradient(left, #deff00 0%, transparent 100%);
-          background-image: linear-gradient(to right, #deff00 0%, transparent 100%);
-          background-repeat: repeat-x;
-          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFDEFF00', endColorstr='#00000000', GradientType=1); }
+      .box .content .line .tonnage {
+        text-align: right;
+        color: black;
+        padding-right: 5px; }
+      .box .content .line .range-min {
+        background: black;
+        float: left;
+        overflow: hidden;
+        text-align: right;
+        padding-right: 5px;
+        color: #deff00; }
+      .box .content .line .range-long {
+        background: #deff00;
+        float: left;
+        overflow: hidden;
+        text-align: right;
+        padding-right: 5px;
+        color: black; }
+      .box .content .line .range-max {
+        border-left: 1px solid black;
+        float: left;
+        overflow: hidden;
+        text-align: right;
+        padding-right: 5px;
+        color: #deff00;
+        background-image: -webkit-linear-gradient(left, #deff00 0%, transparent 100%);
+        background-image: -o-linear-gradient(left, #deff00 0%, transparent 100%);
+        background-image: linear-gradient(to right, #deff00 0%, transparent 100%);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFDEFF00', endColorstr='#00000000', GradientType=1); }
   .box-green {
     box-shadow: inset 0px 0px 1px 1px #deff00;
     background: url("/images/box/box_head_top.png") right top repeat-x;

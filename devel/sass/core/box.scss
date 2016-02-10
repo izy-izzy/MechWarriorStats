@@ -42,8 +42,11 @@
 						color: $weapon-color-beam;
 					}
 				}
+				.tonnage{ 
+					background: $weapon-color-beam;
+				}
 			}
-			&.missile{
+			&.missle{
 				color: $weapon-color-missile;
 				.range{
 					&-min{ color: $weapon-color-missile; }
@@ -52,6 +55,9 @@
 						@include gradient-horizontal($weapon-color-missile, transparent, 0%, 100%);
 						color: $weapon-color-missile;
 					}
+				}
+				.tonnage{ 
+					background: $weapon-color-missile;
 				}
 			}
 			&.ams{
@@ -64,6 +70,9 @@
 						color: $weapon-color-ams;
 					}
 				}
+				.tonnage{ 
+					background: $weapon-color-ams;
+				}
 			}
 			&.ballistic{
 				color:$weapon-color-ballistic;
@@ -74,6 +83,9 @@
 						@include gradient-horizontal($weapon-color-ballistic, transparent, 0%, 100%);
 						color: $weapon-color-ballistic;
 					}
+				}
+				.tonnage{ 
+					background: $weapon-color-ballistic;
 				}
 			}
 			@extend .clearfix;
@@ -89,9 +101,16 @@
 				float:left;
 				width: 25%;
 			}
-			.range{
+			.data{
 				width: 75%;
 				float :left;
+			}
+			.tonnage{
+				text-align: right;
+				color : black;
+				padding-right: 5px;
+			}
+			.range{
 				&-min{
 					background: black;
 					float :left;
