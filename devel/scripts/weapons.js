@@ -1,12 +1,58 @@
 $(document).on('ready',function(){
-	console.log("Weapons");
-
+	
 	var weaponsData = undefined;
+	var weaponsDiv = d3.select("#weapons .content");
+	var weaponsDomain = {
+		min: {
+			tons: 0,
+			slots: 0,
+			price : {
+				id: 0,
+				mc: 0,
+				cb: 0
+			},
+			min_range: 0,
+			long_range: 0,
+			max_range: 0,
+			cooldown: 0,
+			speed: 0,
+			impulse: 0,
+			duration: 0,
+			heat: 0,
+			num_shots: 0,
+			calc_stats : {
+				damageMultiplier: 0,
+				baseDmg: 0,
+				dmg: 0,
+				dps: 0,
+				hps: 0,
+				ehs: 0,
+				critDmgs: 0
+			},
+			min_heat_penality : 0,
+			heat_penality: 0
+		}
+	}
+	weaponsDomain.max = jQuery.extend(true, {}, weaponsDomain.min);
+
+	var weaponsFilter = [
+		{ name: "tons", value: true},
+		{ name: "slots", value: false},
+		{ name: "price_mc", value: false},
+		{ name: "price_cb", value: false},
+		{ name: "min_range", value: false},
+		{ name: "long_range", value: false},
+		{ name: "max_range", value: false},
+		{ name: "cooldown", value: false},
+		{ name: "duration", value: false},
+		{ name: "heat", value: false}
+	]
+	
 
 	var typeWeight = function(type){
 		if (type === "BEAM") {return 5000};
 		if (type === "BALLISTIC") {return 4000};
-		if (type === "MISSILE") {return 3000};
+		if (type === "MISSLE") {return 3000};
 		return 1000;
 	}
 
@@ -23,14 +69,13 @@ $(document).on('ready',function(){
 		var factionValue = factionWeight(a.name) - factionWeight(b.name);
 		var nameValue = a.translated_name.localeCompare(b.translated_name);
 		var totalValue = typeValue + nameValue + factionValue;
-		console.log(typeValue + nameValue + factionValue, typeValue, nameValue, factionValue);	
 		return totalValue;
  	}
 
 	function getInt(object){
 		if (typeof object === 'string'){
-			return parseInt(object);
-		} else if (typeof object == "int"){
+			return parseFloat(object);
+		} else if (typeof object == "number"){
 			return object;
 		} else {
 			return 0;
@@ -40,16 +85,30 @@ $(document).on('ready',function(){
 	d3.json("./data/weapons.json", function(data) {
 		weaponsData = jsonToArray(data);
 		preprocessData(weaponsData);
-		drawWeapons(null, "tonnage");
+		calculateWeaponsMinMax(weaponsData);
+		drawFilters();
+		drawWeapons("tonnage");
 	});
 
 	function preprocessData(data){
-		console.log(data);
 		for (var a = 0; a < data.length; a++){
-			data[a].min_range = getInt(data[a].min_range);
-			data[a].long_range = getInt(data[a].long_range);
-			data[a].max_range = getInt(data[a].max_range);
+			var element = data[a];
+			for (property in element){
+				if (element.hasOwnProperty(property) && weaponsDomain.min.hasOwnProperty(property)){
+					if (getNumberOfProperities(element[property]) > 0){
+						for (subproperty in element[property]){
+							if (element[property].hasOwnProperty(subproperty)){
+								element[property+"_"+subproperty] = getInt((element[property])[subproperty]);
+							}
+						}
+					delete element[property];
+					} else {
+						element[property] = getInt(element[property]);
+					}
+				}
+			}
 		}
+		console.log(data);
 	}
 
 	function jsonToArray(data){
@@ -58,31 +117,57 @@ $(document).on('ready',function(){
 			var entry = data[key]; 
 			outArray.push(entry);
 		}
-		return outArray
+		return outArray;
 	}
 
-	var weaponsDiv = d3.select("#weapons .content");
-	console.log(weaponsDiv);
-
-	maxRange = 0;
-	function computeMaxRange(data){
-		maxRange = d3.max(data,function(d){
-			return d.max_range;
-		}); 
+	function drawFilters(){
+		d3.selectAll("#weaponsfilter .content .filterDiv").selectAll(".filter")
+			.data(weaponsFilter)
+			.enter()
+			.append("div")
+				.attr("class", "filter")
+				.attr("data-selected", function(d){
+					return d.value;
+				})
+				.attr("data-type", function(d){
+					return d.name;
+				})
+				.text(function(d){
+					return d.name;
+				});
 	}
 
-	maxTonnage = 0;
-	function computeMaxTonnage(data){
-		maxTonnage = d3.max(data,function(d){
-			return d.tons;
+	function getNumberOfProperities(object){
+		var count = 0;
+		var property = null;
+		if (typeof object === "object"){
+			for (property in object){
+				if (object.hasOwnProperty(property)){
+					count++;
+				}
+			}
+			return count;
+		} else {
+			return 0;
+		}
+	}
+
+	function calculateWeaponsMinMax(data){
+		data.forEach(function (element, index){
+			for (property in element){
+				if (element.hasOwnProperty(property) && weaponsDomain.min.hasOwnProperty(property)){
+					weaponsDomain.min[property] = Math.min(weaponsDomain.min[property], element[property]);
+					weaponsDomain.max[property] = Math.max(weaponsDomain.max[property], element[property]);
+				}
+			}
 		});
-	}
+	} 
 
 	/*
 		showData: range, heat, weight, cooldown, duration, speed, impulse, heat_penalty, price (cb), duration, dps, hps
 		sortBy: ascending, descending, byName, 
 	*/
-	function drawWeapons(sortBy, showData){
+	function drawWeapons(showData){
 		
 		var weaponsLines = weaponsDiv.selectAll(".line")
 			.data(weaponsData.sort(sortItems))
@@ -99,15 +184,13 @@ $(document).on('ready',function(){
 			});
 
 		if (showData === "range"){
-			computeMaxRange(weaponsData);
 			var weaponsLinesRange = weaponsLines.append("div")
 				.attr("class","data range");
 
 			weaponsLinesRange.append("div")
 				.attr("class","range-min")
 				.style("width", function(d,i){
-					console.log((d.min_range/maxRange)*100, d.min_range	);
-					return (d.min_range/maxRange)*100 + "%";
+						return (d.min_range/weaponsDomain.max.max_range)*100 + "%";
 
 				})
 				.text(function(d){
@@ -120,8 +203,7 @@ $(document).on('ready',function(){
 			weaponsLinesRange.append("div")
 				.attr("class","range-long")
 				.style("width", function(d,i){
-					console.log((d.long_range/maxRange)*100, d.long_range	);
-					return ((d.long_range - d.min_range)/maxRange)*100 + "%";
+					return ((d.long_range - d.min_range)/weaponsDomain.max.max_range)*100 + "%";
 
 				})
 				.text(function(d){
@@ -130,8 +212,7 @@ $(document).on('ready',function(){
 			weaponsLinesRange.append("div")
 				.attr("class","range-max")
 				.style("width", function(d,i){
-					console.log((d.max_range/maxRange)*100, d.max_range	);
-					return ((d.max_range - d.long_range)/maxRange)*100 + "%";
+					return ((d.max_range - d.long_range)/weaponsDomain.max.max_range)*100 + "%";
 
 				})
 				.text(function(d){
@@ -144,17 +225,43 @@ $(document).on('ready',function(){
 		} 
 
 		if (showData === "tonnage"){
-			computeMaxTonnage(weaponsData);
 			var weaponsLinesTonage = weaponsLines.append("div")
 				.attr("class","data");
 			weaponsLinesTonage.append("div")
 				.attr("class","tonnage")
 				.style("width", function(d){
-					return (d.tons/maxTonnage)*100 + "%";
+					return (d.tons/weaponsDomain.max.tons)*100 + "%";
 				})
 				.text(function(d){
 					return (d.tons);
 				});
 		}
+	}
+
+
+	function hasAnyParentClass(element, classname) {
+		if (element.className && element.className.split(' ').indexOf(classname)>=0) return true;
+	    if (element.parentNode){
+	    	return hasAnyParentClass(element.parentNode, classname);
+	    } else {
+	    	return false;
+	    }
+	}
+
+	$(document).on("click", ".filter", function(){
+		var selected = false;
+		toggleFilter($(this).attr("data-type"));
+		drawWeapons("range");
+	});
+
+	function toggleFilter(type){
+		for (var a = 0; a < weaponsFilter.length; a++){
+			if (weaponsFilter[a].hasOwnProperty(type)){
+				console.log(type, (weaponsFilter[a])[type]);
+				(weaponsFilter[a])[type] = !(weaponsFilter[a])[type];
+			} 
+		}
+		console.log(weaponsFilter);
+		drawFilters();
 	}
 });

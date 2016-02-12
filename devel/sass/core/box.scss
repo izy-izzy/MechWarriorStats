@@ -27,7 +27,7 @@
 		height: 100%;
 		min-height: 100px;
 		min-width: 100px;
-		padding: 52px 0px;
+		padding: 52px 10px;
 		background: url('/images/box/box_corner_right_bottom.png') right bottom no-repeat,
 					url('/images/box/box_corner_left_bottom.png') left bottom no-repeat,
 					url('/images/box/box_corner_left_top.png') left top no-repeat;
@@ -89,7 +89,7 @@
 				}
 			}
 			@extend .clearfix;
-			padding: 10px 60px; 
+			padding: 10px 10px; 
 			background: transparent;
 			h3{
 				margin: 0px;

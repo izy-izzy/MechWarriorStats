@@ -1,0 +1,27 @@
+.filter-group{
+	.filter{
+
+	}
+}
+.filter{
+	min-width:200px;
+	padding: 5px 15px;
+	cursor: pointer;
+	display: inline-block;
+	&:before{
+		content: " ";
+		display: inline-block;
+		border: 1px solid silver;
+		margin-right: 5px;
+		width: 10px;
+		height: 10px;
+	}
+	&:hover{
+		background: rgba(255,255,255,0.1);
+	}
+	&[data-selected="true"]{
+		&:before{
+			background: white;
+		}
+	}
+}
